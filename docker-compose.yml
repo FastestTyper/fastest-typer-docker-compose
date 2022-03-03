@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+    mysql:
+      container_name: mysql
+      image: mysql
+      env_file: .env
+      ports:
+        - "3306:3306"
+      volumes: 
+        - ./mysql:/var/lib/mysql
+      networks: 
+        - fastest-typer-net
+
+
+    fastest-typer-front:
+      container_name: fastest-typer-front
+      image: tronxi/fastest-typer-front:latest
+      ports:
+        - "80:80"
+      env_file: .env
+      networks: 
+            - fastest-typer-net
+
+    fastest-typer-service:
+      container_name: fastest-typer-service
+      image: tronxi/fastest-typer-service:latest
+      ports:
+        - "8080:8080"
+      env_file: .env
+      networks: 
+            - fastest-typer-net
+networks: 
+    fastest-typer-net:

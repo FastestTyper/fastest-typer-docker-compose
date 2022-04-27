@@ -31,5 +31,17 @@ services:
         - ./credentials:/credentials
       networks: 
             - fastest-typer-net
+    fastest-rabbit:
+      container_name: fastest-rabbit
+      image: tronxi/rabbit-stomp
+      build:
+        context: ./rabbitmq/
+      ports:
+        - "15672:15672"
+        - "5672:5672"
+        - "61613:61613"
+      env_file: .env
+      networks:
+        - fastest-typer-net
 networks: 
     fastest-typer-net:
